@@ -27,6 +27,8 @@ public class UserController {
 
     @GetMapping(value = "/admin")
     public String printUsersPage(ModelMap model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("admin", user);
         List<User> users = userService.getAllUsers();
         model.addAttribute("usersList", users);
         return "index";
